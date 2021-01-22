@@ -1,5 +1,6 @@
 node {
-    
+      
+      tool name: 'M3', type: 'maven'
 
     //Clone example code from GitHub repository
     stage 'Build'
