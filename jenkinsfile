@@ -1,6 +1,5 @@
 node {
-    def server = Artifactory.newServer url: 'https://devopsartifactory1.jfrog.io/artifactory', credentialsId: 'jenkins-artifactory-integration'
-    def rtMaven = Artifactory.newMavenBuild()
+    
 
     //Clone example code from GitHub repository
     stage 'Build'
@@ -8,4 +7,23 @@ node {
          
           git credentialsId: 'Kirtee-github-private-key', url: 'git@github.com:Kamthekirtee/sample-project-maven.git'
           
-          }
+          
+          
+          
+          stage 'push_to_Artifactory'
+     def server = Artifactory.server 'Artifactory1'
+    url: https://devopsartifactory1.jfrog.io', username: 'kamthekirtee14@gmail.com', password: '@Kituu123'
+def uploadSpec = 
+"""
+{
+"files": [
+    {
+        "pattern": "*/target/*.jar",
+        "target": "example-repo-local"
+    }
+
+  ]
+}"""
+server.upload(uploadSpec)
+
+}
