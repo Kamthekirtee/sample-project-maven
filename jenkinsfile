@@ -1,0 +1,11 @@
+node {
+    def server = Artifactory.newServer url: 'https://devopsartifactory1.jfrog.io/artifactory', credentialsId: 'jenkins-artifactory-integration'
+    def rtMaven = Artifactory.newMavenBuild()
+
+    //Clone example code from GitHub repository
+    stage 'Build'
+    
+         
+          git credentialsId: 'Kirtee-github-private-key', url: 'git@github.com:Kamthekirtee/sample-project-maven.git'
+          
+          }
