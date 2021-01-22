@@ -21,8 +21,9 @@ def uploadSpec =
 {
 "files": [
     {
-        "pattern": "*/target/*.jar",
+        "pattern": "*/home/kirtee1/workspace/jenkins artifactory maven upload/target/*.jar",
         "target": "example-repo-local/"
+        "build": "jenkins artifactory maven upload/36"
     }
 
   ]
