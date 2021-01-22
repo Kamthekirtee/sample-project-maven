@@ -3,7 +3,7 @@ node {
 
     //Clone example code from GitHub repository
     stage 'Build'
-    
+    cleanWs()
          
           git credentialsId: 'Kirtee-github-private-key', url: 'git@github.com:Kamthekirtee/sample-project-maven.git'
           
@@ -11,7 +11,7 @@ node {
           
           
           stage 'push_to_Artifactory'
-          cleanws()
+         
      def server = Artifactory.server 'Artifactory1'
     url: https://devopsartifactory1.jfrog.io', username: 'kamthekirtee14@gmail.com', password: '@Kituu123'
 def uploadSpec = 
