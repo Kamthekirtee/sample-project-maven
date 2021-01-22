@@ -25,14 +25,10 @@ def uploadSpec =
   ]
 }"""
 server.upload(uploadSpec)
+def buildInfo2 = server.upload(uploadSpec)
+server.publishBuildInfo(buildInfo2)
 
- stage 'Publish build info' 
-            
-                rtPublishBuildInfo (
-                    buildName: jenkins artifactory gradle upload,
-                    buildNumber: 29,
-                    serverId: Artifactory1
-                )
+
 
 
 }
