@@ -26,4 +26,13 @@ def uploadSpec =
 }"""
 server.upload(uploadSpec)
 
+ stage 'Publish build info' 
+            
+                rtPublishBuildInfo (
+                    buildName: jenkins artifactory gradle upload,
+                    buildNumber: 29,
+                    serverId: Artifactory1
+                )
+
+
 }
