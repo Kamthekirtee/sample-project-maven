@@ -8,7 +8,7 @@ node {
          
           git credentialsId: 'Kirtee-github-private-key', url: 'git@github.com:Kamthekirtee/sample-project-maven.git'
           sh "mvn web3j:generate-sources"
-          sh "mvn clean install"
+          //sh "mvn clean install"
           
     
           
@@ -16,21 +16,31 @@ node {
          
      def server = Artifactory.server 'Artifactory1'
     url: https://devopsartifactory1.jfrog.io', username: 'kamthekirtee14@gmail.com', password: '@Kituu123'
-def uploadSpec = 
-"""
-{
-"files": [
-    {
-        "pattern": "*/target/*.jar",
-        "target": "https://devopsartifactory1.jfrog.io/artifactory/example-repo-local/",
-        "build": "jenkins artifactory maven upload/36"
-    }
+    def rtMaven = Artifactory.newMavenBuild()
+    def buildInfo
 
-  ]
-}"""
-server.upload(uploadSpec)
-def buildInfo2 = server.upload(uploadSpec)
-server.publishBuildInfo(buildInfo2)
+stage 'maven instance creation'
+ rtMaven.tool ='M3'
+
+rtMaven.deployer releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local', server: server
+rtMaven.resolver releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local', server: server
+rtMaven.deployer.artifactDeploymentPatterns.addExclude("*.jar, *.pom")
+buildInfo = Artifactory.newBuildInfo()
+
+stage 'Install'
+rtMaven.run pom: 'sample-project-maven/pom.xml', goals: 'install', buildInfo: buildInfo
+
+
+
+
+stage 'Deploy'
+
+rtMaven.deployer.deployArtifacts = true
+rtMaven.deployer.deployArtifacts buildInfo
+
+
+stage 'Publish build info'
+server.publishBuildInfo buildInfo
 
 
 
