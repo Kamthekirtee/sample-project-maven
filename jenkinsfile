@@ -22,8 +22,8 @@ node {
 stage 'maven instance creation'
  rtMaven.tool ='M3'
 
-rtMaven.deployer releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local', server: server
-rtMaven.resolver releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local', server: server
+rtMaven.deployer releaseRepo: 'maven-project-repo', snapshotRepo: 'maven-project-repo', server: server
+rtMaven.resolver releaseRepo: 'maven-project-repo', snapshotRepo: 'maven-project-repo', server: server
 rtMaven.deployer.artifactDeploymentPatterns.addExclude("*.jar, *.pom")
 buildInfo = Artifactory.newBuildInfo()
 
