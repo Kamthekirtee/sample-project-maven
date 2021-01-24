@@ -28,7 +28,7 @@ rtMaven.deployer.artifactDeploymentPatterns.addExclude("*.jar, *.pom")
 buildInfo = Artifactory.newBuildInfo()
 
 stage 'Install'
-rtMaven.run pom: 'pom.xml', goals: 'install', buildInfo: buildInfo
+rtMaven.run pom: 'pom.xml', goals: 'clean package', buildInfo: buildInfo
 
 
 
