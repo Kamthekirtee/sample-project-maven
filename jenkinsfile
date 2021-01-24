@@ -24,7 +24,7 @@ stage 'maven instance creation'
 
 rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
 rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
-rtMaven.deployer.artifactDeploymentPatterns.addExclude("*.jar, *.pom")
+//rtMaven.deployer.artifactDeploymentPatterns.addExclude("*.jar, *.pom")
 buildInfo = Artifactory.newBuildInfo()
 
 stage 'Install'
